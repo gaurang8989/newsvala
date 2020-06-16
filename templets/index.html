@@ -1,0 +1,829 @@
+{% load static %}
+{% static "images" as baseUrl %}
+<!doctype html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+		integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css'%}">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rasa">
+
+	<title>NewsVala/samachar</title>
+	
+</head>
+<style>
+	body {
+
+		font-family: "Rasa";
+		font-size: 20px;
+		overflow: hidden;
+		background-color: white;
+		color: black;
+		
+	}
+
+</style>
+
+<body onload = set_time()>
+
+	
+	 <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+
+	<!-- clock-->
+
+	<p align="center" class="clock"><span id="datetime"></span></p>
+
+
+
+	<!-- latest news -->
+
+	<div style="display: flex;">
+		<div class="latest2">Live</div>
+		<div class="latest">
+			<marquee>
+				{%for home in homes%}
+				{%if home.main_flag%}
+				{{home.marquee_1}}
+				<span style="margin-left:50px">{{home.marquee_2}}</span>
+				<span style="margin-left:50px">{{home.marquee_3}}</span>
+				<span style="margin-left:50px">{{home.marquee_4}}</span>
+				<span style="margin-left:50px">{{home.marquee_5}}</span>
+				{%endif%}
+				{%endfor%}
+			</marquee>
+		</div>
+	</div>
+	<!-- banner -->
+
+	<div class="container">
+		<div class="top-space">
+			<div class="row">
+				<div class="col-md-12">
+					<img src="{%static 'images/banner.jpg'%}">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- navbar -->
+
+	<header class="sticky-top top-space">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand" href="pages/index"><img src="{%static 'images/logo.png'%}" class="lo"></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="pages/index"><img src="https://img.icons8.com/material-outlined/24/000000/home.png" class="home" />
+                  <span class="sr-only">(current)</span>
+                </a>
+              </li> 
+              <li class="nav-item">
+                <a class="nav-link" href="pages/khedut">ખેડૂત</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="pages/janvajevu">જાણવા જેવું</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="pages/lekh">લેખ</a>
+              </li>
+			   <li class="nav-item">
+                <a class="nav-link" href="pages/rajkaran">રાજકારણ</a>
+              </li>
+			   <li class="nav-item">
+                <a class="nav-link" href="pages/dharmik">ધાર્મિક</a>
+              </li>
+			   <li class="nav-item">
+                <a class="nav-link" href="pages/swasthya">સ્વાસ્થ્ય</a>
+              </li>
+			   <li class="nav-item">
+                <a class="nav-link" href="pages/samachar">સમાચાર</a>
+              </li>
+			   <li class="nav-item">
+                <a class="nav-link" href="pages/about">અમારા વિશે</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+	<!-- carosel -->
+
+	<div class="container">
+		<div class="top-space">
+			<div class="row">
+				<div class="col-sm-6">
+					<h5 class="title">Live TV</h5>
+					<hr>
+					<div id="myslider" class="carousel slide" data-ride="carousel" data-interval="0">
+						<div class="carousel-inner">
+							{%for home in homes%}
+							{%if home.main_flag%}
+							<div class="carousel-item active" >
+								<div class="embed-responsive embed-responsive-16by9" id="box">
+									<iframe class="embed-responsive-item" src="{{home.carousel_item_1}}" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+								</div>
+							</div>
+
+							<div class="carousel-item">
+								<div class="embed-responsive embed-responsive-16by9">
+									<iframe class="embed-responsive-item" src="{{home.carousel_item_2}}" frameborder="0" allowfullscreen></iframe>
+								</div>
+							</div>
+
+							<div class="carousel-item">
+								<div class="embed-responsive embed-responsive-16by9">
+									<iframe class="embed-responsive-item" src="{{home.carousel_item_3}}" frameborder="0" allow="autoplay"></iframe>
+								</div>
+							</div>
+
+
+							<div class="carousel-item">
+								<div class="embed-responsive embed-responsive-16by9">
+									<iframe class="embed-responsive-item" src="{{home.carousel_item_4}}" frameborder="0" allow="autoplay"></iframe>
+								</div>
+							</div>
+
+
+
+							<div class="carousel-item">
+								<div class="embed-responsive embed-responsive-16by9">
+									<iframe class="embed-responsive-item" src="{{home.carousel_item_5}}" frameborder="0" allow="autoplay"></iframe>
+								</div>
+							</div>
+
+						</div>
+						{%endif%}
+						{%endfor%}
+						<a href="#myslider" class="carousel-control-prev sli" data-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true" style="filter: invert(1);"></span>
+						</a>
+						<a href="#myslider" class="carousel-control-next sli" data-slide="next">
+							<span class="carousel-control-next-icon" style="filter: invert(1)"></span>
+						</a>
+					</div>
+				</div>
+
+
+				<div class="col-sm-6">
+					<h5 class="title">News Galllary</h5>
+					<hr>
+					<div class="row">
+						{%for home in homes%}
+						{%if home.main_flag%}
+						<div class="col-sm-6 part1">
+							<img src="{{home.news_gallary_part1_image1.url}}">
+						</div>
+						<div class="col-sm-6 part1">
+							<img src="{{home.news_gallary_part_1_image2.url}}">
+						</div>
+					</div>
+
+					<div class="row part1">
+						<div class="col-sm-6">
+							<img src="{{home.news_gallary_part_2_image1.url}}" class="part1">
+						</div>
+						<div class="col-sm-6">
+							<img src="{{home.news_gallary_part_2_image2.url}}" class="part1">
+						</div>
+					</div>
+					{%endif%}
+					{%endfor%}
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- part 1 -->
+
+	<div class="container">
+		<div class="top-space">
+			<div class="row">
+				<div class="col-sm-8">
+					<h5 class="title">સમાચાર</h5>
+					<hr>
+					<div class="row">
+						{%for home in homes%}
+						{%if home.main_flag%}
+						<div class="col-sm-6">
+							<div class="card shadow visible">
+								<div class="card-header">
+									<img src="{{home.home_samachar_card_image.url}}" class="img-fluid">
+								</div>
+								<div class="card-body">
+									<a href="pages/samachar"><button class="btn">સમાચાર</button></a><br>
+									<a href="pages/samachar">
+										<h4 class="card-headline">{{home.home_samachar_card_headline}}</h4>
+									</a>
+								</div>
+								<div class="card-footer">
+									<h6>{{home.home_samachar_card_subline}}</h6>
+								</div>
+							</div>
+						</div>
+						{%endif%}
+						{%endfor%}
+						<!-- scroll card-->
+						
+						<div class="col-sm-6">
+							<div class="row">
+								{%for home in homes%}
+								{%if home.main_flag%}
+								<div class="col-sm-5 card-top-space">
+									<img src="{{home.home_samachar_scroll_card_image_1.url}}" class="img-fluid">
+								</div>
+								<div class="col-sm-7 card-top-space">
+									<h6>{{home.home_samachar_scroll_card_1}}</h6>
+										<hr>
+								</div>
+								<div class="col-sm-5 card-top-space">
+									<img src="{{home.home_samachar_scroll_card_image_2.url}}" class="img-fluid">
+								</div>
+								<div class="col-sm-7 card-top-space">
+									<h6>{{home.home_samachar_scroll_card_1}}</h6>
+										<hr>
+								</div>
+								<div class="col-sm-5 card-top-space">
+									<img src="{{home.home_samachar_scroll_card_image_3.url}}" class="img-fluid">
+								</div>
+								<div class="col-sm-7 card-top-space">
+									<h6>{{home.home_samachar_scroll_card_1}}</h6>
+										<hr>
+								</div>
+								<div class="col-sm-5 card-top-space">
+									<img src="{{home.home_samachar_scroll_card_image_4.url}}" class="img-fluid">
+								</div>
+								<div class="col-sm-7 card-top-space">
+									<h6>{{home.home_samachar_scroll_card_1}}</h6>
+										<hr>
+								</div>
+								{%endif%}
+								{%endfor%}
+							</div>
+						</div>
+
+
+					</div>
+
+				</div>
+
+				<div class="col-sm-4">
+					<img src="{%static 'images/dhandho.jpg'%}">
+					<img src="{%static 'images/dhandho.jpg'%}" style="margin-top:50px;">
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- part 2-->
+
+	<div class="container">
+		<div class="top-space">
+			<div class="row">
+				<div class="col-sm-8">
+					<div class="row">
+						<div class="col-sm-6">
+							<h5 class="title">સ્વાસ્થ્ય</h5>
+							<hr>
+							{%for home in homes%}
+							{%if home.main_flag%}
+							<div class="card shadow visible">
+								<div class="card-header">
+									<img src="{{home.home_swasthya_card_image.url}}" class="img-fluid">
+								</div>
+								<div class="card-body">
+									<a href="pages/samachar"><button class="btn">સમાચાર</button></a>
+									<a href="pages/swasthya"><button class="btn">સ્વાસ્થ્ય</button></a><br>
+									<a href="pages/swasthya">
+										<h4 class="card-headline">{{home.home_swasthya_card_headline}}</h4>
+									</a>
+								</div>
+								<div class="card-footer">
+									<h6>{{home.home_swasthya_card_subline}}</h6>
+								</div>
+							</div>
+							{%endif%}
+							{%endfor%}
+						</div>
+
+						<div class="col-sm-6">
+							<h5 class="title">ધાર્મિક</h5>
+							<hr>
+							{%for home in homes%}
+							{%if home.main_flag%}
+							<div class="card shadow visible">
+								<div class="card-header">
+									<img src="{{home.home_dharmik_card_image.url}}" class="img-fluid">
+								</div>
+								<div class="card-body">
+									<a href="pages/dharmik"><button class="btn">ધાર્મિક</button></a>
+									<a href="pages/samachar"><button class="btn">સમાચાર</button></a><br>
+									<a href="pages/dharmik">
+										<h4 class="card-headline">{{home.home_dharmik_card_headline}}</h4>
+									</a>
+								</div>
+								<div class="card-footer">
+									<h6>{{home.home_dharmik_card_subline}}</h6>
+								</div>
+							</div>
+							{%endif%}
+							{%endfor%}
+						</div>
+
+						<div class="col-sm-6">
+							{%for home in homes%}
+							{%if home.main_flag%}
+							<div class="card shadow visible bg-secondary card-radi">
+								<div class="card-body card-radi">
+									<a href="pages/samachar">
+										<h6 class="small-samachar">{{home.small_card_1}}</h6>
+									</a>
+								</div>
+							</div>
+							<div class="card shadow visible bg-secondary card-radi">
+								<div class="card-body card-radi">
+									<a href="pages/samachar">
+										<h6 class="small-samachar">{{home.small_card_2}}</h6>
+									</a>
+								</div>
+							</div>
+							<div class="card shadow visible bg-secondary card-radi">
+								<div class="card-body card-radi">
+									<a href="pages/samachar">
+										<h6 class="small-samachar">{{home.small_card_3}}</h6>
+									</a>
+								</div>
+							</div>
+							<div class="card shadow visible bg-secondary card-radi">
+								<div class="card-body card-radi">
+									<a href="pages/samachar">
+										<h6 class="small-samachar">{{home.small_card_4}}</h6>
+									</a>
+								</div>
+							</div>
+							{%endif%}
+							{%endfor%}
+						</div>
+
+						<!-- scroll card-->
+						
+						<div class="col-sm-6">
+							
+							<div class="row">
+								{%for home in homes%}
+								{%if home.main_flag%}
+								<div class="col-sm-5 card-top-space">
+									<img src="{{home.home_scroll_card_2_image_1.url}}" class="img-fluid">
+								</div>
+								<div class="col-sm-7 card-top-space">
+									<h6>{{home.home_scroll_card_2_1}}</h6>
+										<hr>
+								</div>
+								<div class="col-sm-5 card-top-space">
+									<img src="{{home.home_scroll_card_2_image_2.url}}" class="img-fluid">
+								</div>
+								<div class="col-sm-7 card-top-space">
+									<h6>{{home.home_scroll_card_2_2}}</h6>
+										<hr>
+								</div>
+								<div class="col-sm-5 card-top-space">
+									<img src="{{home.home_scroll_card_2_image_3.url}}" class="img-fluid">
+								</div>
+								<div class="col-sm-7 card-top-space">
+									<h6>{{home.home_scroll_card_2_3}}</h6>
+										<hr>
+								</div>
+								<div class="col-sm-5 card-top-space">
+									<img src="{{home.home_scroll_card_2_image_4.url}}" class="img-fluid">
+								</div>
+								<div class="col-sm-7 card-top-space">
+									<h6>{{home.home_scroll_card_2_4}}</h6>
+										<hr>
+								</div>
+								{%endif%}
+								{%endfor%}
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="col-sm-4">
+				<h5 class="title">Video Samachar Box</h5>
+				<hr>
+					<div class="box">
+						{%for home in homes%}
+						{%if home.main_flag%}
+						<div class="card shadow visible card-radi">
+							<div class="card-header card-radi">
+								<img src="{{home.videoSamchar_card_image_1.url}}" class="card-radi">
+								<a href="{{home.videoSamchar_card_link_1}}"><i class="fa fa-youtube-play" style="font-size:50px;color:red; margin:auto;"></i></a>
+							</div>
+							<div class="card-footer">
+								<h6>{{home.videoSamchar_card_subline_1}}</h6>
+							</div>
+						</div>
+				
+						<div class="card shadow visible card-radi">
+							<div class="card-header card-radi">
+								<img src="{{home.videoSamchar_card_image_2.url}}" class="card-radi">
+								<a href="{{home.videoSamchar_card_link_2}}"><i class="fa fa-youtube-play" style="font-size:50px;color:red; margin:auto;"></i></a>
+							</div>
+							<div class="card-footer">
+								<h6>{{home.videoSamchar_card_subline_2}}</h6>
+							</div>
+						</div>
+						
+						<div class="card shadow visible card-radi">
+							<div class="card-header card-radi">
+								<img src="{{home.videoSamchar_card_image_3.url}}" class="card-radi">
+								<a href="{{home.videoSamchar_card_link_3}}"><i class="fa fa-youtube-play" style="font-size:50px;color:red; margin:auto;"></i></a>
+							</div>
+							<div class="card-footer">
+								<h6>{{home.videoSamchar_card_subline_3}}</h6>
+							</div>
+						</div>
+						{%endif%}
+						{%endfor%}
+						
+					</div>
+
+					<img src="{%static 'images/modi1.jpg'%}" style="margin-top:50px;">
+
+					<img src="{%static 'images/modi1.jpg'%}" style="margin-top:50px;">
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	<!-- part 3 -->
+
+
+	<div class="container">
+		<div class="top-space">
+			<div class="row">
+				<div class="col-sm-8">
+					<h5 class="title">લેખ</h5>
+					<hr>
+					<div class="row">
+						{%for home in homes%}
+						{%if home.main_flag%}
+						<div class="col-sm-6">
+							<div class="card shadow visible">
+								<div class="card-header">
+									<img src="{{home.home_lekh_card_image.url}}" class="img-fluid">
+								</div>
+								<div class="card-body">
+									<a href="pages/lekh"><button class="btn">લેખ</button></a><br>
+									<a href="pages/lekh">
+										<h4 class="card-headline">{{home.home_lekh_card_headline}}</h4>
+									</a>
+								</div>
+								<div class="card-footer">
+									<h6>{{home.home_lekh_card_subline}}</h6>
+								</div>
+							</div>
+							{%endif%}
+							{%endfor%}
+						</div>
+
+						<div class="col-sm-6">
+							{%for home in homes%}
+							{%if home.main_flag%}
+							<div class="card shadow visible bg-secondary card-radi">
+								<div class="card-body card-radi">
+									<a href="pages/lekh">
+										<h6 class="small-samachar">{{home.lekh_small_card_1}}</h6>
+									</a>
+								</div>
+							</div>
+							<div class="card shadow visible bg-secondary card-radi">
+								<div class="card-body card-radi">
+									<a href="pages/lekh">
+										<h6 class="small-samachar">{{home.lekh_small_card_2}}</h6>
+									</a>
+								</div>
+							</div>
+							<div class="card shadow visible bg-secondary card-radi">
+								<div class="card-body card-radi">
+									<a href="pages/lekh">
+										<h6 class="small-samachar">{{home.lekh_small_card_3}}</h6>
+									</a>
+								</div>
+							</div>
+							<div class="card shadow visible bg-secondary card-radi">
+								<div class="card-body card-radi">
+									<a href="pages/lekh">
+										<h6 class="small-samachar">{{home.lekh_small_card_4}}</h6>
+									</a>
+								</div>
+							</div>
+							{%endif%}
+							{%endfor%}
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="col-sm-4">
+					<img src="{%static 'images/dhandho.jpg'%}">
+					<img src="{%static 'images/dhandho.jpg'%}" style="margin-top:50px;">
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- part 4 -->
+
+	<div class="container">
+		<div class="top-space">
+			<div class="row">
+				<div class="col-sm-8">
+					<h5 class="title">ખેડૂત</h5>
+					<hr>
+					{%for home in homes%}
+							{%if home.main_flag%}
+					<div class="card shadow visible">
+						<div class="card-header">
+							<img src="{{home.home_khedut_card_image.url}}" class="img-fluid">
+						</div>
+						<div class="card-body">
+							<a href="pages/khedut"><button class="btn">ખેડૂત</button></a>
+							<a href="pages/samachar"><button class="btn">સમાચાર</button></a><br>
+							<h4 class="card-headline">{{home.home_khedut_card_headline}}</h4>
+						</div>
+						<div class="card-footer">
+							<h6>{{home.home_khedut_card_subline}}</h6>
+						</div>
+					</div>
+					{%endif%}
+					{%endfor%}
+				</div>
+
+				<div class="col-sm-4" style="margin-top:50px;">
+					<img src="{%static 'images/dhandho.jpg'%}">
+					<img src="{%static 'images/dhandho.jpg'%}" style="margin-top:50px;">
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+	<div class="container">
+		<div class="top-space">
+			<div class="row">
+				<div class="col-sm-12">
+					<h2 align="center" class="title">કોરોના અપડેટ્સ</h2>
+					<hr>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- body-->
+
+	<div class="container-fluid fixed-back">
+		<div class="container">
+			<div class="top-space" style="margin-bottom:30px;">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="section-heading">
+							<!--make css file for section-heading class-->
+							<h2>લેટેસ્ટ અપડેટ્સ</h2>
+						</div>
+					</div>
+
+					{%for home in homes%}
+					{%if home.main_flag%}
+					<div class="col-sm-3" style="margin-bottom:30px;">
+						<div class="card shadow visible zoom">
+							<div class="card-header">
+								<img src="{%static 'images/corona.jpg'%}" class="img-fluid">
+							</div>
+							<div class="card-body">
+								<a href="https://www.worldometers.info/coronavirus/country/india/">
+									<p class="h1 text-danger"><em class="update">Active Cases</em></p>
+								</a>
+								<h6 class="no-cases">{{home.corona_active_cases}}</h6>
+								<h6>Cases Add today :-<em class="update">[+{{home.corona_today_active}}] </em> </h6>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="col-sm-3">
+						<div class="card shadow visible zoom">
+							<div class="card-header">
+								<img src="{%static 'images/corona.jpg'%}" class="img-fluid">
+							</div>
+							<div class="card-body">
+								<a href="https://www.worldometers.info/coronavirus/country/india/">
+									<p class="h1 text-danger"><em class="update">Recover Cases</em></p>
+								</a>
+								<h6 class="no-cases">{{home.corona_recover_cases}}</h6>
+								<h6>Cases Recover today :-<em class="update">[+{{home.corona_today_recover}}]</em> </h6>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-3">
+						<div class="card shadow visible zoom">
+							<div class="card-header">
+								<img src="{%static 'images/corona.jpg'%}" class="img-fluid">
+							</div>
+							<div class="card-body">
+								<a href="https://www.worldometers.info/coronavirus/country/india/">
+									<p class="h1 text-danger"><em class="update">Death Cases</em></p>
+								</a>
+								<h6 class="no-cases">{{home.corona_death_cases}}</h6>
+								<h6>Today Death :-<em class="update">[+{{home.corona_today_death}}] </em> </h6>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-3">
+						<div class="card shadow visible zoom">
+							<div class="card-header">
+								<img src="{%static 'images/corona.jpg'%}" class="img-fluid">
+							</div>
+							<div class="card-body">
+								<a href="https://www.worldometers.info/coronavirus/country/india/">
+									<p class="h1 text-danger"><em class="update">Total Cases</em></p>
+								</a>
+								<h6 class="no-cases">{{home.corona_total_cases}}</h6>
+								<h6>Total Cases :-<em class="update">[{{home.corona_today_total}}] </em> </h6>
+							</div>
+						</div>
+					</div>
+					{%endif%}
+					{%endfor%}
+				</div>
+			</div>
+			<div  id="my_centered_buttons">
+				<a href="https://www.worldometers.info/coronavirus/country/india/"><button class="btn" style="background-color:red; color:white; margin-bottom:20px;">View All Cases</button></a>
+			</div>
+		</div>	
+	</div>
+
+	<!-- footer -->
+
+	<footer>
+		<div class="footer-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-3 col-xs-12 col-md-6">
+						<h2>For Yours</h2>
+						<p>જો તમારી પાસે કોઈ અન્ય જાણવા લાયક માહિતી હોય, તો તમે અમને મેસેજ દ્વારા મોકલાવી શકો છો.જેથી
+							અમે એ માહિતી અમારા બીજા લેખમાં ઉમેરી વધુમાં વધુ લોકો સુધી પહોચાડી શકીએ. જો તમે સેવાકીય
+							કાર્યો, પ્રેરણાત્મક સ્ટોરી, સામાજીક કાર્યો, જાણવા જેવું, હાલના બનાવ, દેશ-વિદેશના સમાચાર,અન્ય
+							સમાચાર વગેરેની માહિતી આપ આ વેબસાઈટ મા મુકવા માંગો છો તો અમારો સંપર્ક કરો અને મેળવવા માંગો છો
+							તો ફેસબુક પર અમારા પેજને ફોલો કરી અમારી સાથે જોડાયેલા રહો.અમે જ રસપ્રદ અને ઉપયોગી માહિતી
+							તમારા માટે લાવતા રહીશું. આભાર.</p>
+
+					</div>
+					<div class="col-xl-3 col-xs-12 col-md-6">
+						<h2>Categories</h2>
+						<a href="pages/khedut">
+							<p>ખેડૂત</p>
+						</a>
+						<a href="pages/janvajevu">
+							<p>જાણવા જેવું</p>
+						</a>
+						<a href="pages/lekh">
+							<p>લેખ</p>
+						</a>
+						<a href="pages/rajkaran">
+							<p>રાજકારણ</p>
+						</a>
+						<a href="pages/dharmik">
+							<p>ધાર્મિક</p>
+						</a>
+						<a href="pages/swasthya">
+							<p>સ્વાસ્થ્ય</p>
+						</a>
+						<a href="pages/samachar">
+							<p>સમાચાર</p>
+						</a>
+					</div>
+					<div class="col-xl-3  col-xs-12 col-md-6">
+						<h2>Recent Post</h2>
+						<a href="pages/samachar">
+							<p>લોકડાઉન ૫.૦ની જાહેરાતઃ ૧ મહિનો લંબાવાયું લોકડાઉન, જાણો શું છે નવી ગાઇડલાઇન</p>
+						</a>
+						<a href="pages/samachar">
+							<p>અમદાવાદનાં વધુ એક પોલીસ યુવાને જીવન ટુંકાવ્યું, ગળે ફાંસો ખાઇને કર્યો આપઘાત</p>
+						</a>
+						<a href="pages/samachar">
+							<p>લોકડાઉન હટાવવું કે વધુ સખત કરવું? મોદી અને શાહ વચ્ચે લાંબી બેઠક</p>
+						</a>
+						<a href="pages/samachar">
+							<p>મૃત્યુ પછી તમારા પ્રિયજનને ઇંડામાં રોપીને ઝાડમાં રૂપાંતરિત કરો</p>
+						</a>
+						<a href="pages/samachar">
+							<p>હવે વ્હોટ્સઅપથી LPG સિલિન્ડર બુક કરાવો અને ઓનલાઈન પેમેન્ટ કરો.</p>
+						</a>
+					</div>
+					<div class="col-xl-3  col-xs-12 col-md-6">
+						<h2>Follow Us</h2>
+						<a href="#" class="fa fa-facebook"></a>
+						<a href="#" class="fa fa-twitter"></a>
+						<a href="#" class="fa fa-google"></a>
+						<a href="#" class="fa fa-linkedin"></a>
+						
+						<iframe
+ 							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3686.9420963075627!2d73.07432986427175!3d22.468810142436286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fb55277d1e457%3A0xaf7e43a3d29561b!2z4Kq44Kqw4Kqm4Kq-4KqwIOCqteCqsuCrjeCqsuCqreCqreCqvuCqiCDgqqrgqp_gq4fgqrIg4KqH4Kqo4KuN4Kq44KuN4Kqf4Kq_4Kqf4KuN4Kqv4KuC4KqfIOCqk-CqqyDgqp_gq4fgqpXgqqjgq4vgqrLgq4vgqpzgq4A!5e0!3m2!1sgu!2sin!4v1590571697618!5m2!1sgu!2sin"
+							width="200" height="200" frameborder="0" style="border:0; margin-top:30px;z-index: 15;"
+							allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+						
+						<p>Call us : +91 63 543 277 45 & <br> +91 84 609 111 06 & <br> 63 534 540 29</p>
+
+						<p>Mail To:-</p>
+						<a href="mailto:kathiyawadi.codeclub@gmail.com"><p>kathiyawadi.codeclub@gmail.com (Click to Send)</p></a>
+						
+
+					</div>
+				</div>
+			<hr>
+			<div class="copy">
+			<p class="footer-bottom-text"> All right reserved by &copy; NewsVala.com @2020</p>
+			</div>
+	</footer>
+
+
+	<script src="{%static 'js/jquery-3.3.1.slim.min.js'%}"></script>
+	<script src="{%static 'js/popper.min.js'%}"></script>
+	<script src="{%static 'js/bootstrap.min.js'%}"></script>
+	<script src="{%static 'js/jquery.js'%}"></script>
+
+
+
+	<!-- jquery Top clock -->
+
+	<script>
+		function updateTime() {
+			datetime.innerHTML = new Date();
+		}
+		setInterval(updateTime, 1000);
+	</script>
+	
+	<!-- preloader-->
+	<script>
+		$(window).on('load', function() { // makes sure the whole site is loaded 
+		$('#status').fadeOut(); // will first fade out the loading animation 
+		$('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website. 
+		$('body').delay(350).css({'overflow':'visible'});
+	});
+	</script>
+	
+
+<script>
+	$(document).ready(function(){
+
+		var videoHeight = $('#box').outerHeight();
+		$(window).scroll(function(){
+			
+			$('.embed-responsive').toggleClass('stuck',$(this).scrollTop()>800); 
+			/*800*/
+			
+
+		});
+
+	});
+</script>
+
+
+</body>
+
+</html>

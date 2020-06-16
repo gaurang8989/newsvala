@@ -1,0 +1,429 @@
+{% load static %}
+{%static "images" as baseUrl%}
+<!doctype html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+		integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="{%static 'css/style.css'%}">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rasa">
+
+	<title>NewsVala/khedut</title>
+</head>
+<style>
+	body {
+
+		font-family: "Rasa";
+		font-size: 20px;
+		overflow: hidden;
+	}
+	.scroll{
+		overflow-y: scroll;
+	}
+	
+</style>
+
+<body onload = set_time()>
+
+	
+	 <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+
+
+	<!-- clock-->
+
+	<p align="center" class="clock"><span id="datetime"></span></p>
+
+	<!-- latest news -->
+	<div style="display: flex;">
+		<div class="latest2">Live</div>
+		<div class="latest">
+			<marquee>
+				{%for lekh in alllekh%}
+				{%if lekh.main_flag%}
+				{{lekh.marquee_1}}
+				<span style="margin-left:50px">{{lekh.marquee_2}}</span>
+				<span style="margin-left:50px">{{lekh.marquee_3}}</span>
+				<span style="margin-left:50px">{{lekh.marquee_4}}</span>
+				<span style="margin-left:50px">{{lekh.marquee_5}}</span>
+				{%endif%}
+				{%endfor%}
+			</marquee>
+		</div>
+	</div>
+
+	<!-- banner -->
+
+	<div class="container">
+		<div class="top-space">
+			<div class="row">
+				<div class="col-md-12">
+					<img src="{%static 'images/banner.jpg'%}">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- navbar -->
+
+	<header class="sticky-top top-space">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand" href="index"><img src="{%static 'images/logo.png'%}" class="lo"></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item ">
+                <a class="nav-link" href="index"><img src="https://img.icons8.com/material-outlined/24/000000/home.png" class="home"/>
+                  <span class="sr-only">(current)</span>
+                </a>
+              </li> 
+              <li class="nav-item">
+                <a class="nav-link" href="khedut">ખેડૂત</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="janvajevu">જાણવા જેવું</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="lekh">લેખ</a>
+              </li>
+			   <li class="nav-item">
+                <a class="nav-link" href="rajkaran">રાજકારણ</a>
+              </li>
+			   <li class="nav-item">
+                <a class="nav-link" href="dharmik">ધાર્મિક</a>
+              </li>
+			   <li class="nav-item">
+                <a class="nav-link" href="swasthya">સ્વાસ્થ્ય</a>
+              </li>
+			   <li class="nav-item">
+                <a class="nav-link" href="samachar">સમાચાર</a>
+              </li>
+			   <li class="nav-item">
+                <a class="nav-link" href="about">અમારા વિશે</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+<!-- lekh -->
+
+<div class="container">
+	<div class="top-space">
+		<div class="row">
+			<div class="col-sm-8">
+					<h5 class="title">લેખ</h5>
+					<hr>
+					{%for lekh in alllekh%}
+					{%if lekh.main_flag%}
+					<div class="card shadow visible">
+						<div class="card-header">
+							<img src="{{baseUrl}}/{{lekh.lekh_main_image}}" class="img-fluid">
+						</div>
+						<div class="card-body">
+							<h4 class="card-headline">{{lekh.lekh_main_headline}}</h4>
+						</div>
+						<div class="card-footer">
+							{{lekh.lekh_main_readless}}<span id="dots">...</span>
+							<span id="more">
+							{{lekh.lekh_main_readmore}}
+
+							</span>
+							<button class="btn read">Read More</button> <!--  onclick="myFunction()" id="myBtn"-->
+						</div>
+					</div>
+					{%endif%}
+					{%endfor%}
+				</div>
+
+				<div class="col-sm-4" style="margin-top:50px;">
+					<img src="{%static 'images/dhandho.jpg'%}">
+					<img src="{%static 'images/dhandho.jpg'%}" style="margin-top:50px;">
+				</div>
+
+		</div>
+	</div>
+</div>
+
+
+<!-- lekh card-->
+
+<div class="container">
+	<div class="top-space">
+		<div class="row">
+			<div class="col-sm-8">
+				<div class="row">
+					{%for lekh in alllekh%}
+					<div class="col-sm-6">
+						<div class="card shadow visible">
+							<div class="card-header">
+								<img src="{{baseUrl}}/{{lekh.lekh_body_card_image}}" class="img-fluid">
+							</div>
+							<div class="card-body">
+								<h4 class="card-headline">{{lekh.lekh_body_card_headline}}</h4>
+							</div>
+							<div class="card-footer">
+							{{lekh.lekh_body_card_readless}}<span id="dots">...</span>
+							<span id="more">
+							
+							{{lekh.lekh_body_card_readmore}}
+							
+							</span>
+							<button class="btn read">Read More</button>
+							</div>
+						</div>
+					</div>
+					{%endfor%}
+					
+				</div>
+			</div>
+			
+			<!-- breaking news Box-->
+			
+			<div class="col-sm-4">
+			<h5 class="title">Breaking News</h5>
+				<hr>
+					<div class="box">
+						{%for lekh in alllekh%}
+						<div class="card shadow visible card-radi">
+							<div class="card-header card-radi">
+								<img src="{{baseUrl}}/{{lekh.breaking_card_image}}" class="img-fluid card-radi">
+							</div>
+							<div class="card-body">
+								<h4 class="card-headline text-muted">{{lekh.breaking_card_headline}}</h4>
+							</div>
+						</div>
+						
+						{%endfor%}
+
+					</div>
+					
+					
+					
+					<!-- scroll card-->
+					
+					<div class="top-space">
+						<div class="row">
+							{%for lekh in alllekh%}
+							<div class="col-sm-6">
+								<div class="card shadow visible">
+									<div class="card-header">
+										<img src="{{baseUrl}}/{{lekh.small_card_image}}" class="img-fluid">
+									</div>
+									<div class="card-body">
+										<h4 class="card-headline text-muted">{{lekh.small_card_headline}}</h4>
+									</div>
+								</div>
+							</div>
+							{%endfor%}
+
+						</div>
+					</div>
+					
+					
+					<!-- scroll card-->
+					
+					<div class="row">
+						{%for lekh in alllekh%}
+						<div class="col-sm-5 card-top-space">
+							<img src="{{baseUrl}}/{{lekh.scroll_card_image}}" class="img-fluid">
+						</div>
+						<div class="col-sm-7 card-top-space">
+							<h6>{{lekh.scroll_card_desc}}</h6>
+							<hr>
+						</div>
+						{%endfor%}
+					</div>
+
+					{%for lekh in alllekh%}
+					{%if lekh.main_flag%}
+					<div class="top-space">
+						<div class="card shadow visible card-radi">
+						<div class="card-header card-radi">
+							<img src="{{baseUrl}}/{{lekh.last_card_image}}" class="img-fluid card-radi">
+						</div>
+						<div class="card-body">
+							<button class="btn">સમાચાર</button><br>
+							<a href="samachar">
+								<h4 class="card-headline">{{lekh.last_card_headline}}</h4>
+							</a>
+						</div>
+						<div class="card-footer">
+							<h6>{{lekh.last_card_subline}}</h6>
+						</div>
+					</div>
+					</div>
+					{%endif%}
+					{%endfor%}
+					
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+
+
+<!-- footer -->
+
+	<footer>
+		<div class="footer-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-3 col-xs-12 col-md-6">
+						<h2>તમારી માટે</h2>
+						<p>જો તમારી પાસે કોઈ અન્ય જાણવા લાયક માહિતી હોય, તો તમે અમને મેસેજ દ્વારા મોકલાવી શકો છો.જેથી
+							અમે એ માહિતી અમારા બીજા લેખમાં ઉમેરી વધુમાં વધુ લોકો સુધી પહોચાડી શકીએ. જો તમે સેવાકીય
+							કાર્યો, પ્રેરણાત્મક સ્ટોરી, સામાજીક કાર્યો, જાણવા જેવું, હાલના બનાવ, દેશ-વિદેશના સમાચાર,અન્ય
+							સમાચાર વગેરેની માહિતી આપ આ વેબસાઈટ મા મુકવા માંગો છો તો અમારો સંપર્ક કરો અને મેળવવા માંગો છો
+							તો ફેસબુક પર અમારા પેજને ફોલો કરી અમારી સાથે જોડાયેલા રહો.અમે જ રસપ્રદ અને ઉપયોગી માહિતી
+							તમારા માટે લાવતા રહીશું. આભાર.</p>
+
+					</div>
+					<div class="col-xl-3 col-xs-12 col-md-6">
+						<h2>Categories</h2>
+						<a href="khedut">
+							<p>ખેડૂત</p>
+						</a>
+						<a href="janvajevu">
+							<p>જાણવા જેવું</p>
+						</a>
+						<a href="lekh">
+							<p>લેખ</p>
+						</a>
+						<a href="rajkaran">
+							<p>રાજકારણ</p>
+						</a>
+						<a href="dharmik">
+							<p>ધાર્મિક</p>
+						</a>
+						<a href="swasthya">
+							<p>સ્વાસ્થ્ય</p>
+						</a>
+						<a href="samachar">
+							<p>સમાચાર</p>
+						</a>
+					</div>
+					<div class="col-xl-3  col-xs-12 col-md-6">
+						<h2>Recent Post</h2>
+						<a href="samachar">
+							<p>લોકડાઉન ૫.૦ની જાહેરાતઃ ૧ મહિનો લંબાવાયું લોકડાઉન, જાણો શું છે નવી ગાઇડલાઇન</p>
+						</a>
+						<a href="samachar">
+							<p>અમદાવાદનાં વધુ એક પોલીસ યુવાને જીવન ટુંકાવ્યું, ગળે ફાંસો ખાઇને કર્યો આપઘાત</p>
+						</a>
+						<a href="samachar">
+							<p>લોકડાઉન હટાવવું કે વધુ સખત કરવું? મોદી અને શાહ વચ્ચે લાંબી બેઠક</p>
+						</a>
+						<a href="samachar">
+							<p>મૃત્યુ પછી તમારા પ્રિયજનને ઇંડામાં રોપીને ઝાડમાં રૂપાંતરિત કરો</p>
+						</a>
+						<a href="samachar">
+							<p>હવે વ્હોટ્સઅપથી LPG સિલિન્ડર બુક કરાવો અને ઓનલાઈન પેમેન્ટ કરો.</p>
+						</a>
+					</div>
+					<div class="col-xl-3  col-xs-12 col-md-6">
+						<h2>Follow me</h2>
+						<a href="#" class="fa fa-facebook"></a>
+						<a href="#" class="fa fa-twitter"></a>
+						<a href="#" class="fa fa-google"></a>
+						<a href="#" class="fa fa-linkedin"></a>
+
+						<iframe
+							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3686.9420963075627!2d73.07432986427175!3d22.468810142436286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fb55277d1e457%3A0xaf7e43a3d29561b!2z4Kq44Kqw4Kqm4Kq-4KqwIOCqteCqsuCrjeCqsuCqreCqreCqvuCqiCDgqqrgqp_gq4fgqrIg4KqH4Kqo4KuN4Kq44KuN4Kqf4Kq_4Kqf4KuN4Kqv4KuC4KqfIOCqk-CqqyDgqp_gq4fgqpXgqqjgq4vgqrLgq4vgqpzgq4A!5e0!3m2!1sgu!2sin!4v1590571697618!5m2!1sgu!2sin"
+							width="200" height="200" frameborder="0" style="border:0; margin-top:30px;"
+							allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+							<p>Call us : +91 63 543 277 45 & <br> +91 84 609 111 06 & <br> 63 534 540 29</p>
+
+							<p>Mail To:-</p>
+						<a href="mailto:kathiyawadi.codeclub@gmail.com"><p>kathiyawadi.codeclub@gmail.com (Click to Send)</p></a>
+
+					</div>
+				</div>
+			<hr>
+			<div class="copy">
+			<p class="footer-bottom-text"> All right reserved by &copy; NewsVala.com @2020</p>
+			</div>
+	</footer>
+
+
+	<script src="{%static 'js/jquery-3.3.1.slim.min.js'%}"></script>
+	<script src="{%static 'js/popper.min.js'%}"></script>
+	<script src="{%static 'js/bootstrap.min.js'%}"></script>
+	<script src="{%static 'js/jquery.js'%}"></script>
+	
+
+	
+	<!-- jquery Top clock -->
+
+	<script>
+		function updateTime() {
+			datetime.innerHTML = new Date();
+		}
+		setInterval(updateTime, 1000);
+	</script>
+	
+	<script>
+		$(window).on('load', function() { // makes sure the whole site is loaded 
+		$('#status').fadeOut(); // will first fade out the loading animation 
+		$('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website. 
+		$('body').delay(350).css({'overflow':'visible'});
+	});
+	</script>
+	
+
+
+	<script>
+	
+		$(document).ready(function(){
+		
+			$(".read").click(function(){
+			
+				$(this).prev().toggle();
+				$(this).siblings('.dots').toggle();
+				
+				if($(this).text() == "Read More")
+				{
+					
+					$(this).text("Read Less");
+					
+				}
+				else if($(this).text()=="Read Less"){
+					
+					$(this).text('Read More');
+				}
+				else{
+					
+					$(this).text('Read More');
+				
+				}
+			
+			});
+		
+		});
+		
+	</script>
+	
+
+</body>
+
+</html>
+
+
